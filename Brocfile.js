@@ -1,9 +1,6 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
-var pickFiles = require('broccoli-static-compiler');
-var mergeTrees = require('broccoli-merge-trees');
-//var removeFile = require('broccoli-file-remover');
 
 var isProductionLikeBuild = ['production', 'staging'].indexOf(process.env.EMBER_ENV) > -1;
 
@@ -52,12 +49,6 @@ var app = new EmberApp({
 
 app.import('bower_components/ember-easy-form/index.js');
 
-var sinon = pickFiles('bower_components/sinon', {
-  srcDir: '/',
-  files: ['index.js'],
-  destDir: '/assets/sinon'
-});
-
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //
@@ -71,4 +62,4 @@ var sinon = pickFiles('bower_components/sinon', {
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-module.exports = mergeTrees([app.toTree(), sinon]);
+module.exports = app.toTree();
